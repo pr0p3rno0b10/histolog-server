@@ -16,13 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
 from histolog import views
 
-router = routers.DefaultRouter()
-router.register(r'articles', views.ArticleView, 'article')
 
 urlpatterns = [
   path('admin/', admin.site.urls),
-  path('api/', include(router.urls)),
+  path('api/articles/', views.ArticleListView.as_view(), name='article-list'),
+  path('api/articles/<str:id>/', views.ArticleDetailView.as_view(), name='article-detail'),
 ]
